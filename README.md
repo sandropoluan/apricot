@@ -7,7 +7,7 @@ Lihat screenshot Admin panel nya disini
 <http://www.sandro.id/artikel/19-release-apricot-cms-v1-beta>
 
 *******************
- Requirements
+ ##Requirements
 *******************
 1. PHP >=5.4
 2. MariaDb atau MySql >=5.5
@@ -18,19 +18,18 @@ Lihat screenshot Admin panel nya disini
 5. modul zip pada PHP telah diaktifkan (Modul ini diperlukan nanti untuk proses penginstalan tema. Jika kamu menggunakan Xampp atau Lampp, modul ini biasanya telah aktif secara default, tapi biasa ada beberapa penyedia hosting yang mendisablenya secara default, untuk mengaktifkannya bisa kamu diaktifkan lewat cPanel.
 6. Saat hosting, atur permission 644 untuk File, dan 755 untuk Folder. Biasanya sih penyedia hosting sudah mengaturnya secara default. Tapi tidak salahnya jika kamu pastikan lagi
 
+
 *******************
-Instalasi
+##Instalasi
 *******************
 Silankan baca panduan instalasi disini <http://www.sandro.id/artikel/20-panduan-instalasi-apricot-cms>
 
 
+
 *******************
-Contact
+##Contact
 *******************
 Email: apricot@sandro.id
-
 Gmail: sandrobrayen@gmail.com
-
 Phone: +62-853-9374-1065 
-
 Official website: <http://www.sandro.id>
