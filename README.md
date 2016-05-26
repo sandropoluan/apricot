@@ -29,7 +29,7 @@ Silankan baca panduan instalasi disini <http://www.sandro.id/artikel/20-panduan-
 *******************
 ## Contact
 *******************
-Email: apricot@sandro.id
-Gmail: sandrobrayen@gmail.com
-Phone: +62-853-9374-1065 
-Official website: <http://www.sandro.id>
+-Email: apricot@sandro.id
+-Gmail: sandrobrayen@gmail.com
+-Phone: +62-853-9374-1065 
+-Official website: <http://www.sandro.id>
