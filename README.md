@@ -7,7 +7,7 @@ Lihat screenshot Admin panel nya disini
 <http://www.sandro.id/artikel/19-release-apricot-cms-v1-beta>
 
 *******************
- ##Requirements
+ ## Requirements
 *******************
 1. PHP >=5.4
 2. MariaDb atau MySql >=5.5
@@ -20,14 +20,14 @@ Lihat screenshot Admin panel nya disini
 
 
 *******************
-##Instalasi
+## Instalasi
 *******************
 Silankan baca panduan instalasi disini <http://www.sandro.id/artikel/20-panduan-instalasi-apricot-cms>
 
 
 
 *******************
-##Contact
+## Contact
 *******************
 Email: apricot@sandro.id
 Gmail: sandrobrayen@gmail.com
