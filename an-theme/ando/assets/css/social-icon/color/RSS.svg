@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>RSS</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Color" sketch:type="MSArtboardGroup" transform="translate(-800.000000, -800.000000)" fill="#FF9A00">
+            <g id="Line-7" sketch:type="MSLayerGroup" transform="translate(200.000000, 800.000000)">
+                <path d="M600.000471,37.7142857 C600.000471,34.243 602.81487,31.4285714 606.286118,31.4285714 C609.757367,31.4285714 612.571765,34.243 612.571765,37.7142857 C612.571765,41.1855714 609.757367,44 606.286118,44 C602.81487,44 600.000471,41.1855714 600.000471,37.7142857 Z M644,44 L635.619661,44 C635.619661,24.3587143 619.641547,8.38042857 600.000471,8.38042857 L600.000471,0 C624.261497,0 644,19.7387143 644,44 Z M629.333543,44 L620.953204,44 C620.953204,32.4468571 611.553019,23.0481429 600,23.0481429 L600,14.6661429 C616.174541,14.6661429 629.333543,27.8252857 629.333543,44 Z" id="RSS" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="48px" height="45px" viewBox="0 0 48 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Dropbox</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Color" sketch:type="MSArtboardGroup" transform="translate(-800.000000, -403.000000)" fill="#0F82E2">
+            <g id="Line-3" sketch:type="MSLayerGroup" transform="translate(200.000000, 400.000000)">
+                <path d="M624,29.0332553 L614.1195,37.3457299 L600,28.0535384 L609.7635,20.1734697 L623.999971,29.0332375 L638.2362,20.172109 L647.9997,28.0536896 L633.8802,37.3458811 L623.9997,29.0334065 Z M614.1198,3 L600.0003,12.2921915 L609.7638,20.1722602 L624.0003,11.3124746 L614.1198,3 Z M624.02895,30.8216922 L614.11995,39.1099762 L609.87945,36.3189926 L609.87945,39.4471319 L624.02895,48 L638.17845,39.4471319 L638.17845,36.3189926 L633.93795,39.1099762 L624.02895,30.8216922 Z M648,12.2923427 L633.8805,3.00015119 L624,11.3126258 L638.2365,20.1724114 L648,12.2923427 Z" id="Dropbox" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

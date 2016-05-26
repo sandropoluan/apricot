@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="37px" height="48px" viewBox="0 0 37 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Periscope</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Color" sketch:type="MSArtboardGroup" transform="translate(-205.000000, -900.000000)" fill="#35A3C6">
+            <g id="Line-8" sketch:type="MSLayerGroup" transform="translate(205.000000, 900.000000)">
+                <path d="M37,18.7447086 C37,32.683014 22.2062545,48 18.5001629,48 C14.794397,48 0,32.683014 0,18.7447086 C0,8.39222697 8.28259511,0 18.5001629,0 C28.7180564,0 37,8.39222697 37,18.7447086 Z M18.5001629,7.4333888 C17.6105315,7.4333888 16.7463089,7.54131998 15.916616,7.73968891 C17.421269,8.48728563 18.4597695,10.0494822 18.4597695,11.8618679 C18.4597695,14.3987458 16.4300027,16.4553794 13.9262654,16.4553794 C11.5160191,16.4553794 9.55042568,14.547935 9.40676862,12.142423 C8.06727239,14.0155405 7.27536691,16.3167522 7.27536691,18.8067608 C7.27536691,25.0882236 12.300758,30.1801329 18.5001629,30.1801329 C24.6995677,30.1801329 29.7249588,25.0882236 29.7249588,18.8067608 C29.7249588,12.5252981 24.6995677,7.4333888 18.5001629,7.4333888 Z" id="Periscope" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

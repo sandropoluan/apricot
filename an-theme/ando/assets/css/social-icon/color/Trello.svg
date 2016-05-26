@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Trello</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Color" sketch:type="MSArtboardGroup" transform="translate(-200.000000, -800.000000)" fill="#0069A9">
+            <g id="Line-7" sketch:type="MSLayerGroup" transform="translate(200.000000, 800.000000)">
+                <path d="M6,9 L6,36 C6,37.6575 7.3425,39 9,39 L18,39 C19.6575,39 21,37.6575 21,36 L21,9 C21,7.3425 19.6575,6 18,6 L9,6 C7.3425,6 6,7.3425 6,9 L6,9 Z M27,9 L27,24 C27,25.6575 28.3425,27 30,27 L39,27 C40.6575,27 42,25.6575 42,24 L42,9 C42,7.3425 40.6575,6 39,6 L30,6 C28.3425,6 27,7.3425 27,9 L27,9 Z M6,0 C2.6865,0 0,2.688 0,6 L0,42 C0,45.3135 2.688,48 6,48 L42,48 C45.3135,48 48,45.312 48,42 L48,6 C48,2.6865 45.312,0 42,0 L6,0 Z" id="Trello" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

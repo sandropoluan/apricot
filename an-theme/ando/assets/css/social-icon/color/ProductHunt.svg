@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>ProductHunt</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Color" sketch:type="MSArtboardGroup" transform="translate(-800.000000, -300.000000)" fill="#DE5425">
+            <g id="Line-2" sketch:type="MSLayerGroup" transform="translate(201.000000, 300.000000)">
+                <path d="M626.1995,28.8 L626.1995,28.8 L619.4,28.8 L619.4,36 L614.6,36 L614.6,12 L626.1995,12 C630.839,12 634.5995,15.7605 634.5995,20.4 C634.5995,25.0395 630.839,28.8 626.1995,28.8 M623,0 C609.7445,0 599,10.7445 599,24 C599,37.2555 609.7445,48 623,48 C636.254,48 647,37.2555 647,24 C647,10.7445 636.254,0 623,0 M626.1995,16.8 L626.1995,16.8 L619.4,16.8 L619.4,24 L626.1995,24 C628.1885,24 629.7995,22.3875 629.7995,20.4 C629.7995,18.4125 628.1885,16.8 626.1995,16.8" id="ProductHunt" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="40px" height="18px" viewBox="0 0 40 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Flickr-black</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Black" sketch:type="MSArtboardGroup" transform="translate(-504.000000, -516.000000)" fill="#0B0B0A">
+            <g id="Line-4" sketch:type="MSLayerGroup" transform="translate(200.000000, 500.000000)">
+                <path d="M344,24.7167852 C344,29.5312617 340.060446,33.4358974 335.191862,33.4358974 C330.318575,33.4358974 326.376668,29.5312617 326.376668,24.7167852 C326.376668,19.9046358 330.318575,16 335.191862,16 C340.060446,16 344,19.9046358 344,24.7167852 Z M321.62098,24.7167852 C321.62098,29.5312617 317.679073,33.4358974 312.805786,33.4358974 C307.939554,33.4358974 304,29.5312617 304,24.7167852 C304,19.9046358 307.939554,16 312.805786,16 C317.679073,16 321.62098,19.9046358 321.62098,24.7167852 Z" id="Flickr" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>
