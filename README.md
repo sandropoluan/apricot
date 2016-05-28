@@ -36,3 +36,9 @@ Gmail: sandrobrayen@gmail.com
 Phone: +62-853-9374-1065 
 
 Official website: <http://www.sandro.id>
+
+
+*******************
+Pull Requests
+*******************
+Lakukan pull rerquest pada Branch Dev, pull pada Branch Master akan ditolak
