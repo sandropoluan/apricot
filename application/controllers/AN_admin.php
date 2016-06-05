@@ -905,41 +905,6 @@ class AN_admin extends CI_Controller {
 		redirect("admin");
 	}
 
-
-	function debug(){
-
-
-
-		$this->load->library("pembilang");
-
-
-		
-		 $this->pembilang->_set(190000111);
-		 echo $this->pembilang->terbilang;
-	}
-
-
-
-	function test(){
-
-			$data=$this->db->query("SELECT SUBSTRING_INDEX(artikel.artikel_tags,',','-1') AS tag FROM artikel WHERE artikel_id='7'");
-
-			print_r($data->result_array());
-
-
-	}
-
-	function form(){
-		echo "
-		<form method='post' action='test'>
-		<input type='text' name='data' value='ando\"sasss'>
-		</form>
-
-
-		";
-	}
-
-
  
 
 
