@@ -445,6 +445,10 @@ padding-right: 5px;
     content: "";
 }
 
+.konten img{
+    max-width: 100%;
+}
+
 .komentar{
     width: 100%;
     height: auto;
