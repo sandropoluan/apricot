@@ -10,7 +10,7 @@ class Informasi_web {
 
 	function __construct(){
 		$this->CI=& get_instance();
-		$data=$this->CI->db->get_where("informasi",array("id",1));
+		$data=$this->CI->db->get_where("informasi",array("id"=>1));
 		$data=$data->row();
 
 		$this->info['title']=$data->default_title;
