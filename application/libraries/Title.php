@@ -11,7 +11,7 @@ class Title {
 		$this->CI =& get_instance();
 
 		$this->CI->db->select("prefix_suffix_title,prefix_suffix_sebagai,default_title");
-		$cari=$this->CI->db->get_where("informasi",array("id",1));
+		$cari=$this->CI->db->get_where("informasi",array("id"=>1));
 
 		$data= $cari->row();
 
