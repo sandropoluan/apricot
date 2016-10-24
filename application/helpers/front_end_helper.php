@@ -7,13 +7,7 @@ if ( ! function_exists('assets_url')){
 		$CI =& get_instance();
 		$tema="an-theme/";
 
-	    $tema_aktif=$CI->db->get_where("tema",array("aktif"=>"Y"));
-		if($tema_aktif->num_rows()>0){
-			$data_tema=$tema_aktif->row();
-			$tema.=$data_tema->nama_tema."/";
-		} else {
-			$tema.="default/";
-		}
+		$tema.=$CI->session->userdata('tema_aktif');
 
 		$tema.="assets/";
 		$tema.=$uri;
