@@ -48,7 +48,9 @@ class AN_Apricot extends CI_Controller{
 		if($tema_aktif->num_rows()>0){
 			$data_tema=$tema_aktif->row();
 			$this->tema=$data_tema->nama_tema;
+			$this->session->set_userdata("tema_aktif",$data_tema->nama_tema."/");
 		} else {
+			$this->session->set_userdata("tema_aktif","default/");
 			$this->tema="default";
 		}
 
