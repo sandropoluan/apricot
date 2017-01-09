@@ -90,7 +90,7 @@ $string="<?php
 
 		/*
 		WIB : Asia/Jakarta
-		WITA : Asia/Makasar
+		WITA : Asia/Makassar
 		WIT: Asia/Jayapura
 		 */
 		\"time_zone\"=>\"Asia/Jakarta\", //WIB
