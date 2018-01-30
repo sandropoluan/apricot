@@ -33,9 +33,9 @@ class AN_admin extends CI_Controller {
 		//panggil helper	
 		$this->load->helper(array('filter','url','text'));
 
-		$this->load->model("admin/Myuser","user");
+		$this->load->model("admin/myuser","user");
 
-		$this->load->model("admin/Otorisasi");
+		$this->load->model("admin/otorisasi");
 
 		$this->login= $this->user->set($this->session->userdata('id_user'),$this->session->userdata('name_user'),$this->session->userdata('password_user'));
 		
