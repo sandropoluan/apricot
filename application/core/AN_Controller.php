@@ -105,7 +105,7 @@ class AN_Apricot extends CI_Controller{
 	 $this->public_data["informasi"]["author"]=$this->biodata["nama"];
 	 $this->public_data["informasi"]["article-author"]=$this->biodata["link-fb"];
 	 $this->public_data["informasi"]["article-publisher"]=$this->biodata["link-fb"];
-	 $this->output->enable_profiler(TRUE);
+	 //$this->output->enable_profiler(TRUE);
 	}
 
 
