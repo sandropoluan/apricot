@@ -1,4 +1,5 @@
 .DS_Store
+sh.exe.stackdump
 
 application/cache/*
 !application/cache/index.html
