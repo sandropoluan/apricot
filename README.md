@@ -3,6 +3,8 @@
 Apricot CMS adalah CMS yang dibuat menggunakan Codeigniter 3.
 CMS ini dibuat untuk mempermudah developer-developer dalam mengembangkan dan membuat website blogging, berita, company profile, dan fotografi.
 
+MIT License
+
 Lihat screenshot Admin panel nya disini
 <http://www.sandro.id/artikel/19-release-apricot-cms-v1-beta>
 
