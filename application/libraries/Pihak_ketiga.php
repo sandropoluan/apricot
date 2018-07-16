@@ -14,10 +14,18 @@ class Pihak_ketiga
 	public function __construct(){
 		$this->CI =& get_instance();
 
-		$query=$this->CI->db->query("SELECT * FROM pihak_ketiga WHERE id='1' ");
-
-		$query=$query->row();
+	
 		$this->data= array();
+
+		$cache_pihak_ketiga=$this->CI->cache->file->get('pihak_ketiga');
+		if($cache_pihak_ketiga === FALSE){
+			$query=$this->CI->db->query("SELECT * FROM pihak_ketiga WHERE id='1' ");
+			$query=$query->row();
+			$this->CI->cache->file->save('pihak_ketiga',$query,6000000);
+		} else {
+			$query=$cache_pihak_ketiga;
+		}
+
 
 		$this->recaptcha=array(
  		"key"=>$query->recaptcha_key,

@@ -17,14 +17,28 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		<div class="box-body">
 				<div class="row">
 					<div class="col-sm-12">
-						<?php 
-						if($user_level==1){
-							echo "Halaman ini masih sementara dibuat, silahkan edit data user di halaman 'Managemen User'";
-						} else {
-							echo "Halaman ini masih sementara dibuat, untuk sekarang hanya Super admin yang bisa mengedit data admin";
-						}
-						echo"<br> Akan hadir di versi selanjutnya";
-						?>
+
+					<div class="form-group">
+						<label>Password Sekarang/lama</label>
+						<input type="password" class="form-control" id="password-lama">
+					</div>
+
+					<div class="form-group">
+						<label>Password Baru</label>
+						<input type="password" class="form-control" id="password-baru">
+					</div>
+
+
+					<div class="form-group">
+						<label>Ulangi Password Baru</label>
+						<input type="password" class="form-control" id="konfirmasi-password-baru">
+					</div>
+
+
+					<div class="form-group">
+						<div class="btn btn-info" id="ganti-password-user">Ganti Password</div>
+					</div>
+
 					</div>
 				</div>
 		</div>

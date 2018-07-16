@@ -81,6 +81,15 @@ $route['blog/(\d+)']='semua_artikel/semua/$1';
 
 $route['blog/(\d+)[-\w]+']='semua_artikel/detail/$1';
 
+$route['faq/(\d+)[-\w]+$']='faq/detail/$1';
+
+$route['agenda/(\d+)[-\w]+$']='agenda/detail/$1';
+$route['agenda']='agendas/list_agenda/0';
+$route['agenda/(\d+)/?$']='agendas/list_agenda/$1';
+
+$route['download/(\d+)[-\w]+$']='download/detail/$1';
+$route['download']='downloads/list_download/0';
+$route['download/(\d+)/?$']='downloads/list_download/$1';
 
 $route['kategori/(\d+)/?$']='kategori_artikel/detail/$1';
 $route['kategori/(\d+)/(\d+)$']='kategori_artikel/detail/$1/$2';

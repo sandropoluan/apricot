@@ -10,9 +10,15 @@ class Biodata_web
 		
 		$this->CI =& get_instance();
 
-		$data=$this->CI->db->query("SELECT * FROM biodata WHERE id='1' ");
+		$cache_biodata_web=$this->CI->cache->file->get('biodata_web');
+		if($cache_biodata_web === FALSE){
+			$data=$this->CI->db->query("SELECT * FROM biodata WHERE id='1' ");
+			$data=$data->row();
+			$this->CI->cache->file->save('biodata_web',$data,6000000);
+		} else {
+			$data=$cache_biodata_web;
+		}
 
-		$data=$data->row();
 
 		$this->biodata['foto']=$data->foto;
 		$this->biodata['nama']=$data->nama;

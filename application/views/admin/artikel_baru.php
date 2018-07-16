@@ -145,6 +145,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 							 <div class="input-group">
 							<input type="text" class="form-control" id="og_image" placeholder="optional. Masukan url gambar" value="<?php echo $artikel_og_image ?>"><span class="input-group-addon pilih-fb-url">Pilih</span>
 							</div>
+							<div class="well well-lg foto-produk-preview-area"  data-area='og_image'></div>
 						</div>
 
 						<div class="form-group"></div>

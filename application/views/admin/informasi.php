@@ -38,7 +38,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	          				<div class="panel-body">
 	          					<div class="form-group">
 	          						<label for="nama-web">Nama Web</label>
-	          						<input type="text" class="form-control" id="nama-web" value="<?php echo $data['namaweb']; ?>" />
+	          						<input type="text" class="form-control" id="nama-web" value="<?php echo $data['nama']; ?>" />
 	          					</div>
 
 
@@ -116,7 +116,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	          						<input type="text" class="form-control" id="favicon" value="<?php echo $data['favicon']; ?>" />
 	          						<span class="input-group-addon btn btn-success favicon-select-btn" >pilih</span>
 
-	          						</div>
+                        </div>
+                        <div class="well well-lg foto-produk-preview-area"  data-area='favicon'></div>
 	          					</div>	          					
 
 	          					<div class="form-group">
@@ -124,7 +125,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	          						<div class="input-group">
 	          						<input type="text" class="form-control" id="logo-web" value="<?php echo $data['logo']; ?>" />
 	          						<span class="input-group-addon btn btn-success logo-select-btn" >pilih</span>
-	          					</div>
+                      </div>
+                      <div class="well well-lg foto-produk-preview-area"  data-area='logo-web'></div>
 	          				</div>
 
 
@@ -134,6 +136,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
                         <input type="text" class="form-control" id="featured-image" value="<?php echo $data['featured_image']; ?>" />
                         <span class="input-group-addon btn btn-success featured-image-btn" >pilih</span>
                       </div>
+                      <div class="well well-lg foto-produk-preview-area"  data-area='featured-image'></div>
                     </div>
 
 
@@ -193,6 +196,32 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
                         <label for="max_tampil_produk">Jumlah headline produk</label>
                         <input  type="number" min="1" class="form-control" id="max_tampil_produk" value="<?php echo $data['max_tampil_produk'] ?>" />
                       </div>
+
+
+                      <div class="form-group">
+                        <label for="max_tampil_agenda">Jumlah Agenda perhalaman</label>
+                        <input  type="number" min="1" class="form-control" id="max_tampil_agenda" value="<?php echo $data['max_tampil_agenda'] ?>" />
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="max_tampil_agenda_umum">Jumlah Agenda Umum</label>
+                        <input  type="number" min="1" class="form-control" id="max_tampil_agenda_umum" value="<?php echo $data['max_tampil_agenda_umum'] ?>" />
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="max_tampil_download">Jumlah download perhalaman</label>
+                        <input  type="number" min="1" class="form-control" id="max_tampil_download" value="<?php echo $data['max_tampil_download'] ?>" />
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="max_tampil_download_umum">Jumlah download umum</label>
+                        <input  type="number" min="1" class="form-control" id="max_tampil_download_umum" value="<?php echo $data['max_tampil_download_umum'] ?>" />
+                      </div>
+
+
 
           			  </div>
           			</div>
@@ -262,6 +291,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
                           <input type="text" class="form-control" id="thumbnail_sm" value="<?php echo $data['thumbnail_media']; ?>" />
                           <span class="input-group-addon btn btn-success thumbnail-sm-btn">Pilih</span>
                         </div>
+                        <div class="well well-lg foto-produk-preview-area"  data-area='thumbnail_sm'></div>
                       </div>
 
 	          				</div>

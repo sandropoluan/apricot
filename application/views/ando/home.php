@@ -114,7 +114,7 @@
 
                                 <div class='overlay-effect'>
                                <h4> $value[judul] </h4>
-                               <P>".potong_text($value['isi'],120)."</P>
+                               <P>".potong_text(reversequote($value['isi'],'all'),120)."</P>
                                <a class='btn btn-border btn-effect' href='".artikel_url($value['id'],$value['slug'])."'>Baca</a>
                                 </div>
 
@@ -246,7 +246,7 @@
                         </span>";
                         echo "</span>";
                         echo "<span class='konten'>";
-                        echo potong_text($val['isi'],150);
+                        echo potong_text(reversequote($val['isi'],'all'),150);
                         echo "</span>";
                         echo "</div>";
                         echo "</div>";

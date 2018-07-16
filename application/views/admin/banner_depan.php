@@ -31,7 +31,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  				<div class="input-group">
  					<input type="text" class="form-control" id="gambar-banner" /><span class="input-group-addon btn btn-primary pilih-banner" style="cursor:pointer">Pilih</span>
  				</div>
-
+				 <div class="well well-lg foto-produk-preview-area"  data-area='gambar-banner'></div>
  			</div>
 
 

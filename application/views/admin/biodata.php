@@ -34,6 +34,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
                 <div class="input-group">
                   <input type="text" class="form-control" id="foto-bio" value="<?php echo $data['foto'] ?>" /><span class="input-group-addon btn btn-success bio-foto-btn">Pilih</span>
                 </div>
+                <div class="well well-lg foto-produk-preview-area"  data-area='foto-bio'></div>
               </div>
 
               <div class="form-group">

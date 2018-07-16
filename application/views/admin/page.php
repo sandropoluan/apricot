@@ -49,6 +49,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
                   <input type="text" class="form-control" id="featured_image" value="<?php echo $data['foto']; ?>" />
                   <span class="input-group-addon btn btn-success btn-foto">Pilih</span>
                 </div>
+                <div class="well well-lg foto-produk-preview-area"  data-area='featured_image'></div>
               </div>
 
     

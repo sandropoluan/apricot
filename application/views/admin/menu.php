@@ -40,6 +40,9 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
                         <li class="list-group-item" data-url='<?php echo base_url("about-us");?>' data-nama='About Us' data-code='about-us'>About Us<span class="tambahkan-ke-menu fa fa-sign-in" data-toggle='tooltip' data-placement='top' title='tambahkan ke menu'></span></li>
 
+                        <li class="list-group-item" data-url='<?php echo base_url("faq");?>' data-nama='FAQ' data-code='faq'>FAQ<span class="tambahkan-ke-menu fa fa-sign-in" data-toggle='tooltip' data-placement='top' title='tambahkan ke menu'></span></li>
+
+
                         <li class="list-group-item">Custom <span class="custom-menu fa fa-gear"></span>
 
                           <div class="row custom-menu-box">

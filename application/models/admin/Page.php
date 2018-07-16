@@ -19,8 +19,8 @@ class Page extends CI_Model {
 				"judul"=>$row->page_judul,
 				"foto"=>$row->page_foto,
 				"url"=>$row->page_url,
-				"isi"=>reversequote($row->page_isi,"all"),
-				"javascript"=>reversequote($row->page_javascript,"all"),
+				"isi"=>($row->page_isi),
+				"javascript"=>($row->page_javascript),
 				"status"=>$row->page_status,
 				"keywords"=>$row->page_meta_keywords,
 				"description"=>$row->page_meta_description

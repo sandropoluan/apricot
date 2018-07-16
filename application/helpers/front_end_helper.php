@@ -18,6 +18,20 @@ if ( ! function_exists('assets_url')){
 
 }
 
+function ambil_foto_galeri_from_cache($id){
+	$CI=& get_instance();
+	$cache_foto_galeri=$CI->cache->file->get('fotos_galeri_'.$id);
+	if($cache_foto_galeri === FALSE){
+		$foto=$CI->db->query("SELECT id_foto AS id, nama_foto AS nama, deskripsi_foto AS deskripsi FROM foto_galeri WHERE id_galeri='$id' ORDER BY id_foto DESC");
+		$foto=$foto->result_array();	
+		$CI->cache->file->save('fotos_galeri_'.$id,$foto,6000000);
+	} else {
+		$foto=$cache_foto_galeri;
+	}	
+
+	return $foto;
+}
+
 function img_artikel_url($uri = '',$thumb=false, $protocol = NULL)
 	{
 		$path="an-component/media/upload-gambar-artikel";
@@ -41,6 +55,10 @@ function galeri_url($id,$slug='',$ctrl="galeri"){
 
 }
 
+
+function gambar_cluster($foto){
+	return get_instance()->config->base_url("an-component/media/foto-cluster/$foto");
+}
 
 function img_galeri_url($uri = '',$thumb=false, $protocol = NULL)
 	{
@@ -71,12 +89,34 @@ function page_url($id,$slug=''){
  return get_instance()->config->base_url('page/'.$id.'-'.$slug);
 }
 
+function faq_url($id,$slug=''){
+	return get_instance()->config->base_url('faq/'.$id.'-'.$slug);
+}
+
+function download_url($id,$slug=''){
+	return get_instance()->config->base_url('download/'.$id.'-'.$slug);
+}
+
+function agenda_url($id,$slug=''){
+	return get_instance()->config->base_url('agenda/'.$id.'-'.$slug);
+}
+
+function do_download($id){
+	return get_instance()->config->base_url('do_download/d/'.$id);
+}
+
 function ambil_tag($tag){
 	$CI=& get_instance();
-	$tag=explode(',',$tag);
-	$CI->db->where_in('id_tag',$tag);
-	$data=$CI->db->get('tags');
-	return $data->result_array();
+	$tag=explode(',',$tag);	
+	$slug=implode('_',$tag);
+
+	$cache = $CI->cache->file->get("tags_$slug");
+	if($cache === FALSE){
+		$CI->db->where_in('id_tag',$tag);
+		$cache=$CI->db->get('tags')->result_array();
+		$CI->cache->file->save("tags_$slug",$cache,6000000);
+	} 
+	return $cache;
 }
 
 function ambil_foto_galeri($id,$jumlah=false){
@@ -195,10 +235,67 @@ function potong_text($text,$max=50,$dot=true){
 }
 
 
+function semua_faq(){
+	$CI=& get_instance();
+	$cache = $CI->cache->file->get('semua_faq');
+	if($cache === FALSE){
+		$query=$CI->db->order_by('id','desc')->get('faq');
+		$cache=$query->result_array();
+		$CI->cache->file->save('semua_faq',$cache,6000000);
+	}
+	return $cache;
+}
 
 
+function faq($id=0){
+	$CI=& get_instance();
+	$cache = $CI->cache->file->get('faq_'.$id);
+	if($cache === FALSE){		
+		$query=$CI->db->where(array('id'=>$id))->get('faq');
+		if($query->num_rows()>0){
+			$cache=$query->row_array();
+		} else {
+			$cache=array();
+		}
+		$CI->cache->file->save('faq_'.$id,$cache,6000000);
+		
+	}
+	return $cache;	
+}
 
 
+function agenda($id=0){
+	$CI=& get_instance();
+	$cache = $CI->cache->file->get('agenda_'.$id);
+	if($cache === FALSE){		
+		$query=$CI->db->where(array('id'=>$id))->get('agenda');
+		if($query->num_rows()>0){
+			$cache=$query->row_array();
+		} else {
+			$cache=array();
+		}
+		$CI->cache->file->save('agenda_'.$id,$cache,6000000);
+		
+	}
+	return $cache;	
+}
+
+
+function group_banner($id){
+	$CI=& get_instance();
+	$cache = $CI->cache->file->get('group_banner_'.$id);
+	if($cache === FALSE){
+		$query=$CI->db->order_by('id','asc')->where(array('id_group'=>$id))->get('banner_item');
+		if($query->num_rows()>0){
+			$cache=$query->result_array();
+		} else {
+			$cache=array();
+		}
+		$CI->cache->file->save('group_banner_'.$id,$cache,6000000);
+	}
+	return $cache;
+
+}
 
 
 function horizontal_menu($ul_class="",$li_class=""){

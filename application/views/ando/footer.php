@@ -188,6 +188,9 @@ echo "</div>"; //.col-md-4
           </div>
 
 
+          <div class='form-group'>
+           <input type='text' class='form-control' placeholder='Judul pesan' name='judul' />
+          </div>
 
           <div class='form-group'>
            <textarea class='form-control' placeholder='Pesan' name='pesan' style='height: 100px !important;'></textarea>
@@ -300,8 +303,57 @@ $(function(){
     evt.preventDefault();    
     if(!$(this)[0].mengirim) {
     __this=$(this)      
-    __this[0].mengirim=true;
     var val=__this.serialize();
+
+    var data={};
+    $.each(__this.serializeArray(),function(i,v){
+       data[v.name] = v.value;
+     });
+      
+    if(!(data.nama.trim().length > 0)){
+      noty({
+            text:'Nama harus diisi',
+            type: 'error',
+            layout: 'center',
+            dismissQueue:true
+      });
+      return;
+    } else if(!(data.email.trim().length > 0)){
+      noty({
+            text:'Email harus diisi',
+            type: 'error',
+            layout: 'center',
+            dismissQueue:true
+      });
+      return;
+    } else if(!(data.judul.trim().length > 0)){
+      noty({
+            text:'Judul harus diisi',
+            type: 'error',
+            layout: 'center',
+            dismissQueue:true
+      });
+      return;
+    } else if(!(data.pesan.trim().length > 0)){
+      noty({
+            text:'Pesan harus diisi',
+            type: 'error',
+            layout: 'center',
+            dismissQueue:true
+      });
+      return
+    } else if(!(data['g-recaptcha-response'].trim().length > 0)){
+      noty({
+            text:'Captcha harus diisi',
+            type: 'error',
+            layout: 'center',
+            dismissQueue:true
+      });
+      return;
+    }
+    
+    
+    __this[0].mengirim=true;
     var action=__this.attr("action");
     __this.find("button").hide();
     __this.find(".cssload-container").show();
@@ -318,7 +370,7 @@ $(function(){
             type: 'success',
             layout: 'center',            
             dismissQueue:true
-                        });
+            });
          $('form#kontak-form').find("input[type=text],input[type=password], textarea").val("");
         } else if(a.status=='error') {
           noty({
@@ -326,7 +378,6 @@ $(function(){
             type: 'error',
             layout: 'center',
             dismissQueue:true
-
           });
         }
 

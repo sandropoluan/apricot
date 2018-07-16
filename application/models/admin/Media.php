@@ -43,7 +43,10 @@ class Media extends CI_Model{
                   foreach($daftar_foto as $data2){
                     $ukuran=byte_format($data2['size']);
                     $date=mdate('%Y-%m-%d / %h:%i %a',$data2['date']);
-                    //$date=$data2['date'];
+										//$date=$data2['date'];
+										  if($data2['name'] == 'index.html'){
+												continue;
+											}
                       $this->result2.="<tr>
                               <td>$data2[name]</td>
                               <td>$ukuran</td>

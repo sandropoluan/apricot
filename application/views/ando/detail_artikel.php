@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div  itemprop="articleBody" class="isi">
 
 			<?php 
-			echo set_tag($artikel['isi']);
+			echo set_tag(reversequote($artikel['isi'],'all'));
 			 ?>
 
 		</div>

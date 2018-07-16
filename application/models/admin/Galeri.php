@@ -23,7 +23,7 @@ class Galeri extends CI_Model{
 				$this->hasil=array(
 					"id"=>$row->galeri_id,
 					"nama"=>$row->galeri_nama,
-					"deskripsi"=>reversequote($row->galeri_deskripsi,"all"),
+					"deskripsi"=>($row->galeri_deskripsi),
 					"featured"=>$row->galeri_feature_img,
 					"url"=>$row->galeri_url,
 					"meta_keyword"=>$row->galeri_meta_keyword,

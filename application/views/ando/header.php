@@ -27,8 +27,8 @@ defined('BASEPATH') OR exit('Eiits! Jangan coba coba Mblo!!!!');
 
 
 	<link rel='shortcut icon' href='<?php echo $informasi['favicon'] ?>' />	
-	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css' />
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css' />
 
 	<!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="<?php echo assets_url('font-awesome/css/font-awesome.min.css'); ?>" />
@@ -74,7 +74,53 @@ defined('BASEPATH') OR exit('Eiits! Jangan coba coba Mblo!!!!');
 	<link rel="stylesheet" type="text/css" href="<?php echo assets_url('css/main.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo assets_url('css/custom.css') ?>" />
 
-	
+  <?php
+    if($informasi['current_page'] == 'faq'){
+    
+      $schema = array();
+      $schema['@context'] = "http://schema.org";
+      $schema['@graph'] = array();
+
+      foreach($faq as $f){
+        $schema['@graph'][]= array(
+          '@type' => 'Question',
+          'text' => $f['pertanyaan'],
+          'dateCreated' => $f['tanggal'],
+          'acceptedAnswer' => array(
+            '@type' => 'Answer',
+            'text' => $f['jawaban'],
+            'dateCreated' =>  $f['tanggal']
+          ),
+        );
+      }
+
+    echo '<script type="application/ld+json">';
+    echo json_encode($schema,JSON_PRETTY_PRINT);
+    echo '</script>';
+
+    } else if($informasi['current_page'] == 'detail-faq'){
+      $schema = array();
+      $schema['@context'] = "http://schema.org";
+      $schema['@graph'] = array();
+
+      
+        $schema['@graph'][]= array(
+          '@type' => 'Question',
+          'text' => $faq['pertanyaan'],
+          'dateCreated' => $faq['tanggal'],
+          'acceptedAnswer' => array(
+            '@type' => 'Answer',
+            'text' => $faq['jawaban'],
+            'dateCreated' =>  $faq['tanggal']
+          ),
+        );
+    
+
+    echo '<script type="application/ld+json">';
+    echo json_encode($schema,JSON_PRETTY_PRINT);
+    echo '</script>';
+    }
+  ?>
 
 	<style type="text/css">
 		<?php echo $informasi["custom_css"]; ?>

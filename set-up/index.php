@@ -366,10 +366,13 @@ $dir=trim($hasil,"/");
 
 					},
 					dataType: "json",
+					cache:false,
 					success: function(a){
 						if(a.status=="error"){
 							_this.html("Lanjut");
 							_this[0].memproses=false;
+							$(".kesalahan-status").html(a.responseText);
+				  		$('#modalError').modal('show')
 						} else {
 							_this.html("Lanjut");
 							_this[0].memproses=false;

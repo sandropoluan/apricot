@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<div class="artikel">
 				<div class="konten">
-					<?php echo $informasi["terms_conditions"]; ?>
+					<?php echo reversequote($informasi["terms_conditions"],'all'); ?>
 					
 				</div>
 			</div>

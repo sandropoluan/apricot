@@ -156,8 +156,9 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
               <div class="form-group"> 
                 <label for="featured-image">Featured Image</label> <small>url gambar</small>
                 <div class="input-group">
-                  <input type="tect" class="form-control" id="featured-image"  value="<?php echo $data['featured'] ?>" /><span class="input-group-addon btn btn-success btn-galeri">Pilih</span>
+                  <input type="text" class="form-control" id="featured-image"  value="<?php echo $data['featured'] ?>" /><span class="input-group-addon btn btn-success btn-galeri">Pilih</span>
                 </div>
+                <div class="well well-lg foto-produk-preview-area"  data-area='featured-image'></div>
               </div>
 
 
@@ -176,6 +177,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
                 <div class="input-group">
                   <input type="text" class="form-control" id="og-image" value="<?php echo $data['og_image'] ?>"/><span class="input-group-addon btn btn-success   btn-og-galeri">Pilih</span>
                 </div>
+                <div class="well well-lg foto-produk-preview-area"  data-area='og-image'></div>
               </div>
 
               <div class="form-group">

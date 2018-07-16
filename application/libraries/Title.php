@@ -10,10 +10,17 @@ class Title {
 	public function __construct(){
 		$this->CI =& get_instance();
 
-		$this->CI->db->select("prefix_suffix_title,prefix_suffix_sebagai,default_title");
-		$cari=$this->CI->db->get_where("informasi",array("id"=>1));
 
-		$data= $cari->row();
+		$cache_title_format=$this->CI->cache->file->get('title_format');
+		if($cache_title_format === FALSE){
+			$this->CI->db->select("prefix_suffix_title,prefix_suffix_sebagai,default_title");
+			$cari=$this->CI->db->get_where("informasi",array("id"=>1));	
+			$data= $cari->row();
+			$this->CI->cache->file->save('title_format',$data,6000000);
+		} else {
+			$data=$cache_title_format;
+		}
+
 
 		$this->default=$data->default_title;
 
@@ -60,6 +67,13 @@ class Title {
 		return $this->prefix." ".$title." ".$this->suffix; 
 
 	}
+
+	public function umum($title){
+
+		return $this->prefix." ".$title." ".$this->suffix; 
+
+	}
+	
 
 	public function tag($title){
 

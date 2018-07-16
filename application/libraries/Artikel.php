@@ -15,52 +15,61 @@ class Artikel
 
 	public function artikel_populer($max=7){
 
-		$max=intval($max);
+		$cache_artikel_populer=$this->CI->cache->file->get('artikel_populer');
+		if($cache_artikel_populer === FALSE){
+			$max=intval($max);
+			$data=$this->CI->db->query("SELECT artikel.artikel_id AS id,
+			 artikel.artikel_judul AS judul, 
+			 artikel.artikel_isi AS isi,
+			 artikel.artikel_tags as tags,
+			 artikel.artikel_tgl_posting AS tanggal,
+			 artikel.artikel_dibaca AS dibaca,
+			 artikel.artikel_seo_url AS slug,
+			 kategori.id_kategori,
+			 kategori.nama_kategori,
+			 user.nama_lengkap AS nama_admin,
+			 user.id_user AS id_admin,
+			 foto_artikel.nama_foto AS foto
+			 FROM artikel,kategori,user ,foto_artikel
+			 WHERE artikel.artikel_status='publish' AND kategori.aktif='Y' AND kategori.terhapus='N' AND user.status_user='Y' AND user.terhapus='N' AND artikel.artikel_id_user=user.id_user AND artikel.artikel_kategori=kategori.id_kategori AND   foto_artikel.id_foto=(SELECT CASE  foto_artikel.featured WHEN 'Y' THEN id_foto WHEN 'N' THEN id_foto END AS 'id_foto'  FROM foto_artikel WHERE foto_artikel.id_artikel=artikel.artikel_id ORDER BY featured ASC LIMIT 1)  ORDER BY artikel.artikel_dibaca DESC LIMIT $max	
+			 ");	
+			$data= $data->result_array();
+			$this->CI->cache->file->save('artikel_populer',$data,43200);
+			return $data;
 
-		$data=$this->CI->db->query("SELECT artikel.artikel_id AS id,
-		 artikel.artikel_judul AS judul, 
-		 artikel.artikel_isi AS isi,
-		 artikel.artikel_tags as tags,
-		 artikel.artikel_tgl_posting AS tanggal,
-		 artikel.artikel_dibaca AS dibaca,
-		 artikel.artikel_seo_url AS slug,
-		 kategori.id_kategori,
-		 kategori.nama_kategori,
-		 user.nama_lengkap AS nama_admin,
-		 user.id_user AS id_admin,
-		 foto_artikel.nama_foto AS foto
-		 FROM artikel,kategori,user ,foto_artikel
-		 WHERE artikel.artikel_status='publish' AND kategori.aktif='Y' AND kategori.terhapus='N' AND user.status_user='Y' AND user.terhapus='N' AND artikel.artikel_id_user=user.id_user AND artikel.artikel_kategori=kategori.id_kategori AND   foto_artikel.id_foto=(SELECT CASE  foto_artikel.featured WHEN 'Y' THEN id_foto WHEN 'N' THEN id_foto END AS 'id_foto'  FROM foto_artikel WHERE foto_artikel.id_artikel=artikel.artikel_id ORDER BY featured ASC LIMIT 1)  ORDER BY artikel.artikel_dibaca DESC LIMIT $max
+		} else {
+			return $cache_artikel_populer;
+		}
 
-		 ");
-
-		return $data->result_array();
 
 	}
 
 	public function artikel_headline($max=5){
-
-		$max=intval($max);
-
-		$data=$this->CI->db->query("SELECT artikel.artikel_id AS id,
-		 artikel.artikel_judul AS judul, 
-		 artikel.artikel_isi AS isi,
-		 artikel.artikel_tgl_posting AS tanggal,
-		 artikel.artikel_tags as tags,
-		 artikel.artikel_dibaca AS dibaca,
-		 artikel.artikel_seo_url AS slug,		 
-		 kategori.nama_kategori,
-		 kategori.id_kategori,
-		 user.nama_lengkap AS nama_admin,
-		 user.id_user AS id_admin,
-		 foto_artikel.nama_foto AS foto
-		 FROM artikel,kategori,user,foto_artikel
-		 WHERE artikel.artikel_sbg_headline='Y' AND artikel.artikel_status='publish' AND kategori.aktif='Y' AND kategori.terhapus='N' AND user.status_user='Y' AND user.terhapus='N' AND artikel.artikel_id_user=user.id_user AND artikel.artikel_kategori=kategori.id_kategori AND foto_artikel.id_foto=(SELECT CASE  foto_artikel.featured WHEN 'Y' THEN id_foto WHEN 'N' THEN id_foto END AS 'id_foto'  FROM foto_artikel WHERE foto_artikel.id_artikel=artikel.artikel_id ORDER BY featured ASC LIMIT 1) ORDER BY artikel.artikel_id DESC LIMIT $max
-
-		 ");
-
-		return $data->result_array();
-
+		$cache_artikel_headline=$this->CI->cache->file->get('artikel_headline');
+		if($cache_artikel_headline  === FALSE){
+			$max=intval($max);
+			$data=$this->CI->db->query("SELECT artikel.artikel_id AS id,
+			 artikel.artikel_judul AS judul, 
+			 artikel.artikel_isi AS isi,
+			 artikel.artikel_tgl_posting AS tanggal,
+			 artikel.artikel_tags as tags,
+			 artikel.artikel_dibaca AS dibaca,
+			 artikel.artikel_seo_url AS slug,		 
+			 kategori.nama_kategori,
+			 kategori.id_kategori,
+			 user.nama_lengkap AS nama_admin,
+			 user.id_user AS id_admin,
+			 foto_artikel.nama_foto AS foto
+			 FROM artikel,kategori,user,foto_artikel
+			 WHERE artikel.artikel_sbg_headline='Y' AND artikel.artikel_status='publish' AND kategori.aktif='Y' AND kategori.terhapus='N' AND user.status_user='Y' AND user.terhapus='N' AND artikel.artikel_id_user=user.id_user AND artikel.artikel_kategori=kategori.id_kategori AND foto_artikel.id_foto=(SELECT CASE  foto_artikel.featured WHEN 'Y' THEN id_foto WHEN 'N' THEN id_foto END AS 'id_foto'  FROM foto_artikel WHERE foto_artikel.id_artikel=artikel.artikel_id ORDER BY featured ASC LIMIT 1) ORDER BY artikel.artikel_id DESC LIMIT $max
+			 ");
+	
+			$data=$data->result_array();
+			$this->CI->cache->file->save('artikel_headline',$data,6000000);
+			return $data;
+		} else {
+			return $cache_artikel_headline;
+		}		
 
 	}
 
@@ -340,10 +349,19 @@ class Artikel
 
 		$data=$data->row_array();
 
-		$foto=$this->CI->db->query("SELECT id_foto AS id, nama_foto AS nama FROM foto_artikel WHERE id_artikel='$id' ORDER BY id_foto DESC ");
+		$cache_foto_artikel=$this->CI->cache->file->get('foto_artikel_'.$id);
+		if($cache_foto_artikel  === FALSE){
 
-		$data["galeri"]=$foto->result_array();
-		$data["isi"]=reversequote($data["isi"],"all");
+			$foto=$this->CI->db->query("SELECT id_foto AS id, nama_foto AS nama FROM foto_artikel WHERE id_artikel='$id' ORDER BY id_foto DESC ")->result_array();
+
+			$this->CI->cache->file->save('foto_artikel_'.$id,$foto,6000000);
+		} else {
+			$foto=$cache_foto_artikel;
+		}
+			
+
+		$data["galeri"]=$foto;
+		$data["isi"]=($data["isi"]);
 		$data["og_title"]=trim($data["og_title"]);
 		$data["og_image"]=trim($data["og_image"]);
 		$data["og_description"]=trim($data["og_description"]);

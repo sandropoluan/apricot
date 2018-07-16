@@ -97,6 +97,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
           <div class="pull-right">
             <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            <a  class="btn btn-default balas-pesan" href='' ><i class='fa fa-envelope-o'></i> Balas</a>
                <button type="button" class="btn btn-default tombol-hapus-pesan" data-id='' ><i class="fa fa-trash-o"></i> Hapus</button>
           </div>
                 

@@ -10,16 +10,26 @@ class Informasi_web {
 
 	function __construct(){
 		$this->CI=& get_instance();
-		$data=$this->CI->db->get_where("informasi",array("id"=>1));
-		$data=$data->row();
+
+		$cache_informasi_web=$this->CI->cache->file->get('informasi_web');
+		if($cache_informasi_web === FALSE){			
+			$data=$this->CI->db->get_where("informasi",array("id"=>1));
+			$data=$data->row();
+			$this->CI->cache->file->save('informasi_web',$data,6000000);
+		} else {
+			$data=$cache_informasi_web;
+		}
+
+
+		
 
 		$this->info['title']=$data->default_title;
 		$this->info["nama"]=$data->nama;
 
-		$this->info["deskripsi"]=reversequote($data->deskripsi,"all");
-		$this->info["disclaimer"]=reversequote($data->disclaimer,"all");
-		$this->info["privacy"]=reversequote($data->webprivacy,"all");
-		$this->info["terms_conditions"]=reversequote($data->termcondition,"all");
+		$this->info["deskripsi"]=$data->deskripsi;
+		$this->info["disclaimer"]=$data->disclaimer;
+		$this->info["privacy"]=$data->webprivacy;
+		$this->info["terms_conditions"]=$data->termcondition;
 
 		$this->info["meta_keyword"]=$data->meta_keyword;
 		$this->info["meta_deskripsi"]=$data->meta_deskripsi;
@@ -28,7 +38,7 @@ class Informasi_web {
 
 		$this->info["favicon"]=$data->favicon;
 		$this->info["logo"]=$data->logo;
-		$this->info["custom_css"]=reversequote($data->custom_css,"all");
+		$this->info["custom_css"]=$data->custom_css;
 		$this->info["custom_javascript"]="";
 		$this->info["current_page"]="";
 		$this->info["uniqueid"]="";
@@ -49,9 +59,13 @@ class Informasi_web {
 		$this->info_for_system["max_tampil_artikel"]=$data->max_tampil_artikel;
 		$this->info_for_system["max_headline_artikel"]=$data->max_headline_artikel;
 		$this->info_for_system["max_headline_galeri"]=$data->max_headline_galeri;
+		$this->info_for_system["max_tampil_agenda"]=$data->max_tampil_agenda;
+		$this->info_for_system["max_tampil_download"]=$data->max_tampil_download;
 		$this->info_for_system["max_tampil_galeri"]=$data->max_tampil_galeri;
 		$this->info_for_system["max_tampil_produk"]=$data->max_tampil_produk;
 		$this->info_for_system["max_headline_produk"]=$data->max_headline_produk;
+
+		
 		$this->info_for_system["sleep_sampai"]=$data->sleep_sampai;
 
 	}

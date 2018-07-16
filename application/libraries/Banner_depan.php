@@ -9,9 +9,18 @@ class Banner_depan
 	public function __construct(){
 		$this->CI =& get_instance();
 
-		$data=$this->CI->db->query("SELECT * FROM banner_depan ORDER BY id DESC");
+		$cache_banner_depan=$this->CI->cache->file->get('banner_depan');
+		if($cache_banner_depan === FALSE){
+			$data=$this->CI->db->query("SELECT * FROM banner_depan ORDER BY id DESC");
+			$this->banner=$data->result_array();
 
-		$this->banner=$data->result_array();
+			$this->CI->cache->file->save('banner_depan',$this->banner,6000000);
+		} else {
+			$this->banner=$cache_banner_depan;
+		}
+
+
+
 	}
 
 

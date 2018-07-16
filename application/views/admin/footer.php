@@ -109,6 +109,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
     <script src="<?php path_adm() ?>/dist/js/ando_admin.js" type="text/javascript"></script>
 
+   <script src="<?php path_adm() ?>/datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+
 
     <script src="<?php path_adm() ?>/dist/dropzone/dropzone.min.js" type="text/javascript"></script>
 
@@ -1343,7 +1345,70 @@ var pieData = [
             <?php  } 
            ?> 
 
-           <?php if($npage==6){
+           <?php if($npage==5){ 
+           ?> 
+
+           $("#ganti-password-user").click(function(){
+              var _this=$(this);
+              if(!_this[0].memproses){
+                _this[0].memproses=true;
+                var password=$("#password-lama").val();
+                var password_baru=$("#password-baru").val();
+                var konfirmasi_password=$("#konfirmasi-password-baru").val();
+
+                if(password=="" || password==" "){
+                  error_alert("Tidak Lengkap","Masukan Password Lama");
+                  _this[0].memproses=false;
+                } else if(password_baru.length<8){
+                  error_alert("Tidak lengkap","Password baru harus Minimal 8 Karakter");
+                  _this[0].memproses=false;
+                } else if(password_baru!=konfirmasi_password){
+                  error_alert("Tidak lengkap","Password Tidak sama");
+                  _this[0].memproses=false;
+                } else {
+                 show_proses("Mengganti Password");
+                  $.ajax({
+                    type:"post",
+                    url:"<?php echo base_url('AN_ajax_admin/proses_update_password') ?>",
+                    data:{
+                      password_lama:password,
+                      password_baru:password_baru
+                    },
+                    cache:false,
+                    dataType:"json",
+                    success:function(a){
+
+                      if(a.status=="success"){
+                        
+                        show_proses("Password telah berhasil diganti");
+
+                        setTimeout(function() {
+                          window.location.reload();
+                        }, 2000);
+
+                      } else if(a.status=="error"){
+                        error_alert("Kesalahan",a.pesan);
+                        _this[0].memproses=false;
+                        hide_proses();
+                      }
+
+                    },
+                    error:function(){
+                      error_alert("Kesalahan","Harap coba kembali");
+                      _this[0].memproses=false;
+                      hide_proses();
+                    }
+
+
+                  });
+
+                }
+
+              }
+           });
+         
+
+           <?php } if($npage==6){
             ?>
 
             $("#judul_artikel").on("keyup",function(){
@@ -2302,7 +2367,7 @@ if($artikel_status==false){
             var customCSS = CodeMirror.fromTextArea($("#custom-css")[0],{mode:"css",lineNumbers:true,theme:"3024-day"});
 
             $("#sleep_sampai").datepicker({
-              dateFormat: "yy-mm-dd 23:59:59",
+             format: "yyyy/mm/dd"
             });
 
             $(document).on("click","#simpan-infromasi",function(){
@@ -2358,6 +2423,14 @@ if($artikel_status==false){
               max_tampil_galeri:$("#max_tampil_galeri").val(),
                max_headline_produk:$("#max_headline_produk").val(),
               max_tampil_produk:$("#max_tampil_produk").val(),
+
+              max_tampil_agenda:$("#max_tampil_agenda").val(),
+              max_tampil_agenda_umum:$("#max_tampil_agenda_umum").val(),
+              max_tampil_download:$("#max_tampil_download").val(),
+              max_tampil_download_umum:$("#max_tampil_download_umum").val(),
+
+
+
               sleep_mode:$("#sleep_mode").val(),
               sleep_sampai:$("#sleep_sampai").val()
               }
@@ -4197,11 +4270,11 @@ if($artikel_status==false){
             _this=$(this);
             if(!_this[0].menyimpan){
               _this[0].menyimpan=true;
-
+              show_proses('Menyimpan...');
               var data=_this.serialize();
               data+="&script_google_analytics="+googleAnalitycs.getValue();
 
-              console.log(data);
+              //console.log(data);
 
 
               $.ajax({
@@ -4212,19 +4285,23 @@ if($artikel_status==false){
                 cache: false,
                 success:function(a){
                   if(a=='ok'){
-
+                    show_proses("Berhasil!");
+                    setTimeout(() => {
+                      hide_proses();
+                      _this[0].menyimpan=false;
+                    }, 2000);
                   } else {
                   error_alert("Internal Error","Terjadi kesalahan tidak terduga<br>Pesan Error:<br>"+a);
-
+                  _this[0].menyimpan=false;
                   }
                 },
                 error:function(a,b,c){
 
                   error_alert("Error","Harap cek koneksi internet anda<br>Pesan Error:<br>"+c);
-
+                  _this[0].menyimpan=false;
                 },
                 complete:function(){
-                  _this[0].menyimpan=false;
+                  
                  // console.log(data);
                 }
 
@@ -4270,6 +4347,7 @@ if($artikel_status==false){
                     modal.find(".email").html(a.email);
                     modal.find(".tanggal").html(a.tanggal);
                     modal.find(".pesan").html(a.pesan);
+                    modal.find(".balas-pesan").attr("href","<?php echo base_url('admin/reply') ?>/"+id);
                     modal.find(".tombol-hapus-pesan").attr("data-id",a.id);
                     $(".table-kontak").find("tr[data-id='"+a.id+"']").css("font-weight","normal");
                   },
@@ -4323,7 +4401,7 @@ if($artikel_status==false){
               }
 
            <?php
-           }   if($npage==24){
+           } if($npage==24){
            ?>
 
             $(".distribusikan").click(function(){
@@ -4569,11 +4647,731 @@ if($artikel_status==false){
 
 
 
+           <?php
+           } if($npage==26){
+           ?>
+
+           direct_upload(".agenda-foto-btn","#agenda-foto");
+           textEditor("#deskripsi-editor");
+
+           $("#tanggal-mulai").datepicker({
+            format: "yyyy/mm/dd"
+           });
+           $("#tanggal-selesai").datepicker({
+            format: "yyyy/mm/dd"
+           });
+
+
+           $(".update-agenda").click(function(){
+              var _this=$(this);
+              if(!_this[0].memproses){
+                _this[0].memproses=true;
+
+                show_proses("Memproses agenda...");
+
+                var id=_this.attr("data-id");
+                var judul=$("#agenda-judul").val();
+                var foto=$("#agenda-foto").val();
+                var deskripsi=tinymce.get("deskripsi-editor").getContent();
+                var tanggal_mulai=$("#tanggal-mulai").val()
+                var tanggal_selesai=$("#tanggal-selesai").val()
+
+
+                $.ajax({
+                  type:"post",
+                  url:"<?php echo base_url('AN_ajax_admin/input_agenda') ?>",
+                  data:{
+                    id:id,
+                    judul:judul,
+                    foto:foto,
+                    deskripsi:deskripsi,
+                    tanggal_mulai:tanggal_mulai,
+                    tanggal_selesai:tanggal_selesai
+                  },
+                  cache: false,
+                  dataType:"json",
+                  success: function(a){
+                      show_proses("Proses Berhasil!")
+
+                    if(a.status=="baru"){
+                      setTimeout(function(){
+                        window.location.href="<?php echo base_url('admin/agenda/') ?>"+"/"+a.id;
+                      },1500);
+
+
+                    } else {
+
+                      setInterval(function(){
+                      window.location.reload();                        
+                      },1500);
+
+                    }
+                  },
+                  error: function(){
+                    error_alert("Kesalahan","Silahkan coba lagi");
+                    hide_proses();
+                  },
+                  complete: function(){
+                    _this[0].memproses=false;
+                  }
+               }); 
+
+              }
+           });
 
 
            <?php
-           }  
+           } if($npage==27){
            ?>
+
+            $("#table-agenda").dataTable({
+              aaSorting:[]
+            });
+
+            $(document).on("click",".hapus-agenda",function(){
+              konfirmasi("Hapus data","Yakin akan menghapus data ini?",function(a){
+              var id=a.attr("data-id");
+              $.ajax({
+                type:"post",
+                data:{id:id},
+                url:"<?php echo base_url('AN_ajax_admin/hapus_agenda') ?>",
+                dataType:"json",
+                cache:false,
+                success:function(){
+                  window.location.reload();
+                },
+                error:function(){
+                  error_alert("Kesalahan","Coba lagi");
+                }
+              })                
+              },$(this));
+            });
+
+           <?php
+           } if($npage==28){
+           ?>
+
+            $(document).on("click",".hapus-download",function(){
+
+              konfirmasi("Hapus data","Yakin akan menghapus data ini?",function(a){
+              var id=a.attr("data-id");
+              $.ajax({
+                type:"post",
+                data:{id:id},
+                url:"<?php echo base_url('AN_ajax_admin/hapus_download') ?>",
+                dataType:"json",
+                cache:false,
+                success:function(){
+                  window.location.reload();
+                },
+                error:function(){
+                  error_alert("Kesalahan","Coba lagi");
+                }
+              })                
+              },$(this));    
+
+            });
+
+           <?php
+           }  if($npage==29){
+           ?>
+
+            textEditor("#deskripsi-file");
+            var file_download_terupload=false;
+
+            var file_download=new Dropzone(".file_download", { url:"<?php echo base_url() ?>AN_ajax_admin/file_download" ,
+                                                      method:'post',
+                                                      maxFiles:1,
+                                                      paramName:"userfile",
+                                                      addRemoveLinks: true,
+                                                      dictDefaultMessage:"Drop file disini",
+                                                      dictInvalidFileType:"Type file ini tidak dizinkan",
+                                                      dictRemoveFile:"Batalkan file ini"
+                                                    }); 
+           var sesi=$("#sesi-form-upload").val();
+           var id=$("#id-file-download").val(); 
+
+           var file_token;
+
+           file_download.on("sending",function(a,b,c){
+
+            a.token=file_token=Math.random();
+            c.append('sesi',sesi);
+            c.append('token_file',a.token);
+            c.append('id',id);
+          
+            console.log('mengirim');
+           
+           });
+
+
+           file_download.on("success",function(a,b){
+              console.log(b);
+              file_download_terupload=true;
+           })
+
+         
+
+           file_download.on("removedfile",function(a){
+            var tok=a.token;
+            $.ajax({
+              type:"POST",
+              data:{"token":tok},
+              url:"<?php echo base_url() ?>AN_ajax_admin/delete_file_download_temp",
+              cache:false,
+              success:function(a){
+                console.log("delete sukses");
+                file_download_terupload=false;
+              },
+              error: function(a,b,c){
+                console.log("delete gagal, cek koneksi internet")
+              }
+            });
+           
+           });
+
+
+           $(window).unload(function(){
+
+            $.ajax({
+              type:"POST",
+              data:{"token":file_token},
+              url:"<?php echo base_url() ?>AN_ajax_admin/delete_file_download_temp",
+              cache:false,
+              success:function(a){
+                console.log("delete sukses");
+              },
+              error: function(a,b,c){
+                console.log("delete gagal, cek koneksi internet")
+              }
+            });
+
+           });
+
+
+           $(".simpan-file").click(function(){
+              var _this=$(this);
+              var id=_this.attr("data-id");
+
+              if(!file_download_terupload && id<1){
+                error_alert("Belum upload file","Harap upload file")
+                return;
+              }
+
+              if(!_this[0].memproses){
+                show_proses("Menyimpan data...");
+                _this[0].memproses=true;
+                var nama=$("#nama-file").val();
+                var sesi=$("#sesi-form-upload").val();
+                var deskripsi=tinymce.get("deskripsi-file").getContent();
+                $.ajax({
+                  type:"post",
+                  url:"<?php echo base_url('AN_ajax_admin/proses_input_download') ?>",
+                  data:{
+                    id:id,
+                    nama:nama,
+                    sesi:sesi,
+                    deskripsi:deskripsi
+                  },
+                  dataType:"json",
+                  cache: false,
+                  success:function(){
+                    show_proses("Proses berhasil!!");
+                    if(id<1){
+
+                    setTimeout(function(){
+                      window.location.href="<?php echo base_url('admin/semua_download') ?>";
+                    },1500);
+
+                      return;
+                    } else {
+
+                      setTimeout(function(){
+                        window.location.reload();
+                      },1500);
+
+                    }
+                  },
+                  error:function(){
+                    error_alert("Kesalahan","Silahkan coba lagi");
+                  },
+                  complete:function(){
+                   _this[0].memproses=false;
+                  }
+                });
+              }
+           });
+
+        /*   file_download.on("queuecomplete",function(){
+            uupload_in_progress=false;
+             <?php if($artikel_id!=0){ ?>
+              $(".dropzone").css("min-height","96px");
+              $(".dz-message").css("display","block");
+              <?php
+             }
+           ?>
+            console.log("Semua operasi selesai");
+           }); */
+
+
+
+           <?php
+           }  if($npage==32){
+           ?>
+
+           $(".update-smtp").click(function(){
+            var _this=$(this);
+            if(!_this[0].memproses){
+              _this[0].memproses=true;
+              var nama=$("#nama-email").val();
+              var host=$("#host-email").val();
+              var user=$("#user-email").val();
+              var password=$("#password-email").val();
+              var port=$("#port-email").val();
+              var ssl_connection='N';
+
+              if($("#ssl").is(":checked")){
+                ssl_connection='Y';
+              }
+
+              show_proses("Mengupdate...");
+              $.ajax({
+                type:"post",
+                data:{
+                  host:host,
+                  nama:nama,
+                  user:user,
+                  password:password,
+                  port:port,
+                  ssl_connection:ssl_connection
+                },
+                url:"<?php echo base_url('AN_ajax_admin/update_smtp') ?>",
+                cache: false,
+                dataType:"json",
+                success:function(){
+                  show_proses("Berhasil");
+                  $("#password-email").val("");
+                  setTimeout(function(){
+                    hide_proses();
+                  },2000);
+                  _this[0].memproses=false;
+                },
+                error: function(){
+                  _this[0].memproses=false;
+                  hide_proses();
+                  error_alert("Gagal","Terjadi kesalahan. Harap coba lagi");
+                }
+              });
+
+            }
+
+
+           });
+
+
+           <?php
+           }  if($npage==33){
+           ?>
+
+           textEditor("#pesan-email");
+
+
+           $(".kirim-email").click(function(){
+              var _this=$(this);
+              if(!_this[0].memproses){
+                _this[0].memproses=true;
+
+                show_proses("Mengirim...");
+                var judul=$("#judul-pesan").val();
+                var email=$("#tujuan-email").val();
+                var isi=tinymce.get("pesan-email").getContent();
+
+                $.ajax({
+                  type:"post",
+                  url:"<?php echo base_url('AN_ajax_admin/kirim_email') ?>",
+                  data:{
+                    judul:judul,
+                    email:email,
+                    isi:isi
+                  },
+                  cache: false,
+                  dataType:'json',
+                  success:function(a){
+                    show_proses("Pesan berhasil terkirim!");
+                    setTimeout(function(){
+                      hide_proses();
+                      _this[0].memproses=false;
+                    },5000);
+                  },
+                  error:function(){
+                    error_alert("Kesalahan","Harap coba lagi");
+                    _this[0].memproses=false;
+                    hide_proses();
+                  },
+                  complete:function(){
+                   
+                  }
+                });
+
+              }
+           });
+
+
+            $("table").dataTable({
+              aaSorting:[]
+            });
+
+
+            $(document).on("click",".hapus-pelatihan",function(){
+
+                konfirmasi("Hapus Pelatihan","Yakin akan menghapus data ini?",function(a){
+                  var id=a.attr("data-id");
+
+                 $.ajax({
+                    type:"post",
+                    data:{id:id},
+                    url:"<?php echo base_url('AN_ajax_admin/hapus_pelatihan') ?>",
+                    cache:false,
+                    dataType:"json",
+                    success:function(){
+                      window.location.reload();
+                    },
+                    error:function(){
+                      error_alert("Kesalahan","Coba lagi");
+                    }
+                 });
+
+                },$(this));
+
+            });
+
+           <?php
+           }  if($npage==34){
+           ?>
+
+            $(document).on("click",".hapus-faq",function(){
+              var _this=$(this);
+              if(!_this[0].memproses){
+                konfirmasi("Hapus pertanyaan","Yakin akan menghapus pertanyaan ini?",function(a){
+                  if(!_this[0].memproses){
+                    _this[0].memproses=true;
+                    var id=_this.attr('data-id');
+                    show_proses('Sedang memproses');
+                      $.ajax({
+                      type:"post",
+                      data:{id:id},
+                      url:"<?php echo base_url('AN_ajax_admin/hapus_faq') ?>",
+                      cache:false,
+                      dataType:"json",
+                      success:function(){
+                        window.location.reload();
+                      },
+                      error:function(error){
+                        console.log(error);
+                        hide_proses();
+                        _this[0].memproses=false;
+                        error_alert("Kesalahan","Harap coba lagi");
+                      }
+                  });                   
+                  }
+                },_this);
+              }
+            });
+
+
+           <?php
+           }  if($npage==35){
+           ?>
+            textEditor('#jawaban-faq');
+            
+            $('#submit-faq').click(function(){
+              var _this=$(this);
+              if(!_this[0].memproses){
+                var pertanyaan = $(".pertanyaan-faq").val().trim();
+                var jawaban = tinymce.get("jawaban-faq").getContent();
+                var id = _this.attr('data-id');
+                if(!pertanyaan.length){
+                  error_alert('Pertanyaan','Masukan pertanyaan');
+                } else if(!jawaban.length){
+                  error_alert('Jawaban','Masukan jawaban');
+                } else {
+                  _this[0].memproses=true;
+                  show_proses('Memproses...');
+                  $.ajax({
+                    type:'post',
+                    data:{id:id,pertanyaan:pertanyaan,jawaban:jawaban},
+                    url:"<?php echo base_url('AN_ajax_admin/insert_faq') ?>",
+                    dataType:"json",
+                    cache:false,
+                    success:function(data){
+                      show_proses('Berhasil!');
+                      setTimeout(() => {
+                        window.location.href="<?php echo base_url('admin/faq') ?>"+"/"+data.id;
+                        _this[0].memproses=false;
+                      }, 1500);
+                    },
+                    error:function(a){
+                      console.log(a);
+                      error_alert('Gagal','Terjadi kesalahan. Harap coba lagi');
+                      hide_proses();
+                      _this[0].memproses=false;
+                    },
+                    complete:function(){
+                      
+                      
+                    }
+                  });
+                }
+              }
+            });
+
+
+           <?php
+           }  if($npage==36){
+           ?>
+
+            $(document).on("click",".hapus-group-banner",function(){
+              var _this= $(this);
+              if(!_this[0].memproses){
+                konfirmasi("Hapus group banner","Yakin akan menghapus group banner ini?",function(a){
+                  if(!_this[0].memproses){
+                    _this[0].memproses=true;
+                    var id = _this.attr('data-id');
+                    show_proses('Sedang menghapus group banner');
+                    $.ajax({
+                      type:'post',
+                      url:"<?php echo base_url('AN_ajax_admin/hapus_group_banner') ?>",
+                      data:{id:id},
+                      cache:false,
+                      dataType:'json',
+                      success:function(a){
+                        show_proses('Berhasil terhapus. Mereload halaman...');
+                        window.location.reload();
+                      },
+                      error:function(a){
+                        hide_proses();
+                        console.log(a);
+                        error_alert('Gagal','Harap coba lagi');
+                        _this[0].memproses=false;
+                      }
+                    })
+                  }
+                });
+              }
+            });
+
+           <?php
+           }  if($npage==37){
+           ?>
+
+             direct_upload(".btn-new-banner-field","#new-banner-field");
+             direct_upload(".btn-edit-banner-field","#edit-banner-field");
+
+             $("#add-button-toggle").click(function(){
+               $("#new-banner-area").slideToggle();
+             });
+
+             $(document).on("click","#submit-new-banner-field",function(){
+               var _this = $(this);
+               if(!_this[0].memproses){
+                 var gambar = $("#new-banner-field").val().trim();
+                 var header = $("#header-banner-field").val().trim();
+                 var caption = $("#caption-banner-field").val().trim();
+                 var alt_text = $("#alt-banner-field").val().trim();
+                 var link_text = $("#link-text-banner-field").val().trim();
+                 var link_href = $("#link-href-banner-field").val().trim();
+                 if(!gambar.length){
+                   error_alert("Gambar","Anda belum memilih gambar");
+                 } else {
+                   var id= Math.random(); 
+                   var el="";
+                   el+= "<tr class='item-row' data-id='"+id+"'>";
+                   el+= "<td class='gambar'>"+gambar+"</td>";
+                   el+= "<td class='header'>"+header+"</td>";
+                   el+= "<td class='caption'>"+caption+"</td>";
+                   el+= "<td class='alt-text'>"+alt_text+"</td>";
+                   el+= "<td class='link-text'>"+link_text+"</td>";
+                   el+= "<td class='link-href'>"+link_href+"</td>";
+                   el+= "<td class='aksi'>";
+                     el+= "<div class='btn btn-success btn-edit-banner'>Edit</div> ";
+                     el+= "<div class='btn btn-danger btn-hapus-banner'>Hapus</div>";
+                   el+= "</td>";
+                   el+= "</tr>";
+                  
+                  $("#new-banner-field").val("")
+                  $("#header-banner-field").val("")
+                  $("#caption-banner-field").val("")
+                  $("#alt-banner-field").val("")
+                  $("#link-text-banner-field").val("")
+                  $("#link-href-banner-field").val("")
+
+                  $(".body-table").prepend(el);
+                  $("#new-banner-area").slideToggle();
+                 }
+               }
+             });
+
+             $(document).on("click",".btn-hapus-banner",function(){
+               var _this = $(this);
+               konfirmasi("Hapus","Yakin akan menghapus banner ini",function(a){
+                 var parent =_this.parent().parent();
+                 var id = parent.attr('data-id');
+                 parent.remove();
+               },_this);
+             });
+
+            $("#simpan-perubahan-banner").click(function(){
+              var _this=$(this);
+              if(!_this[0].memproses){
+                var data = [];
+                $(".item-row").each(function(index){
+                  var _this =$(this);
+                  var gambar = _this.children('.gambar').html();
+                  var header = _this.children('.header').html();
+                  var caption = _this.children('.caption').html();
+                  var alttext = _this.children('.alt-text').html();
+                  var linktext = _this.children('.link-text').html();
+                  var linkhref = _this.children('.link-href').html();
+                  data.push({
+                    gambar:gambar,
+                    alttext:alttext,
+                    header:header,
+                    caption:caption,
+                    link_href:linkhref,
+                    link_text:linktext,
+                  });
+                });
+                var nama_group =$("#nama-group").val().trim();
+                var id = _this.attr('data-id');
+
+                if(!nama_group.length){
+                  error_alert("Nama group kosong","Nama group belum dimasukan");
+                } else if(!data.length){
+                  error_alert("Banner kosong","Belum ada banner yang dimasukan");
+                } else {
+                  if(!_this[0].memproses){
+                    _this[0].memproses=true;
+                    show_proses("Memproses...");
+                    $.ajax({
+                      type:'post',
+                      data:{id:id,nama:nama_group,data:data},
+                      url:"<?php echo base_url('AN_ajax_admin/submit_item_banner') ?>",
+                      cache:false,
+                      dataType:'json',
+                      success:function(data){
+                        show_proses("Berhasil... Mereload halaman...");
+                        setTimeout(function(){
+                          window.location.href = "<?php echo base_url('admin/banner/') ?>"+data.id;
+                        },2000);
+                      },
+                      error:function(a){
+                        console.log(a);
+                        _this[0].memproses=false;
+                        hide_proses();
+                        error_alert('Gagal','Harap coba lagi');
+                      }
+                    });
+                  }
+                }
+              }
+            });
+
+
+            $(document).on("click",".btn-edit-banner",function(){
+              var _this = $(this);
+              var parent = _this.parent().parent();
+              var id = parent.attr('data-id');
+              $("#submit-modal-edit").attr('data-id',id);
+
+              var gambar = parent.children('.gambar').html();
+              var header = parent.children('.header').html();
+              var caption = parent.children('.caption').html();
+              var alttext = parent.children('.alt-text').html();
+              var linktext = parent.children('.link-text').html();
+              var linkhref = parent.children('.link-href').html();
+            
+             $("#edit-banner-field").val(gambar);             
+             $("#edit-header-banner-field").val(header);
+             $("#edit-caption-banner-field").val(caption);
+             $("#edit-alt-banner-field").val(alttext);
+             $("#edit-link-text-banner-field").val(linktext);
+             $("#edit-link-href-banner-field").val(linkhref);
+
+             $("#modal-edit").addClass('force_show').modal('show');
+              
+            });
+
+              
+
+              $("#tutup-modal-edit").click(function(){
+                $("#modal-edit").removeClass('force_show').modal('hide');
+              });
+
+
+              $("#submit-modal-edit").click(function(){
+                var _this = $(this);
+                var id = _this.attr("data-id");
+
+                var gambar = $("#edit-banner-field").val().trim(); 
+                var header = $("#edit-header-banner-field").val().trim();
+                var caption = $("#edit-caption-banner-field").val().trim();
+                var alttext = $("#edit-alt-banner-field").val().trim();
+                var linktext = $("#edit-link-text-banner-field").val().trim();
+                var linkhref = $("#edit-link-href-banner-field").val().trim();
+                if(!gambar.length){
+                  error_alert('Gambar kosong','Anda masih belum memilih gambar');
+                } else {
+                  var elem = $(".item-row[data-id="+id+"]");
+                  elem.children('.gambar').html(gambar);
+                  elem.children('.header').html(header);
+                  elem.children('.caption').html(caption);
+                  elem.children('.alt-text').html(alttext);
+                  elem.children('.link-text').html(linktext);
+                  elem.children('.link-href').html(linkhref);
+                  $("#modal-edit").removeClass('force_show').modal('hide');
+                }
+                
+              });
+
+           <?php
+           }
+           ?>
+
+  $("#clear-cache").click(function(){
+    var _this= $(this);
+    if(!_this[0].memproses){
+      konfirmasi("Hapus cache","Yakin akan menghapus semua cache?",function(a){
+        if(!_this[0].memproses){
+        _this[0].memproses=true;
+        show_proses('Sedang menghapus cache');
+        
+        $.ajax({
+          type:'post',
+          data:null,
+          url:"<?php echo base_url('AN_ajax_admin/hapus_cache') ?>",
+          cache:false,
+          dataType :'json',
+          success:function(data){
+            show_proses('Cache berhasil terhapus');
+            setTimeout(function(){
+              hide_proses();
+            },1500);
+            _this[0].memproses=false;
+            console.log(data);
+          },
+          error:function(error){
+            console.log(error);
+            _this[0].memproses=false;
+            error_alert('Gagal','Harap coba lagi');
+            hide_proses();
+          }
+        })          
+        }
+
+    },$(this));    
+    }
+  })         
+
 
   function urutkan_nomor(classTarget){
 
@@ -4725,6 +5523,30 @@ if($artikel_status==false){
             //  tombol.html().fadeOut();
             }
            }
+
+           setInterval(function(){
+             $(".input-group-addon").each(function(index){
+               var _this = $(this);
+               var input_form= _this.siblings("input[class~='form-control']");
+
+               if(input_form.length){
+                var value = input_form.val().trim();
+                var ID = input_form.attr('id');
+                var preview_area= $(".foto-produk-preview-area[data-area='"+ID+"']"); 
+
+                if(preview_area.length){                  
+                  if(value.length){
+                  preview_area.html("<img src="+value+" />");
+                  } else {
+                  preview_area.html('');
+                  }
+                }
+
+                }
+
+
+             });
+           },1500);
 
         })
       </script>

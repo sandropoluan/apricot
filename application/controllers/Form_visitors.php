@@ -9,13 +9,14 @@ class Form_visitors extends AN_Apricot{
 	if($this->input->server('REQUEST_METHOD')!='POST'){
 		exit("DILARANG");
 	}
-
+	$this->output->enable_profiler(false);
 	$this->load->helper(array('url'));
 	}
 
 	function contact(){
 		$nama=$this->input->post('nama',TRUE);
 		$email=$this->input->post('email',TRUE);
+		$judul=$this->input->post('judul',TRUE);
 		$phone=$this->input->post('phone',TRUE);
 		$pesan=$this->input->post('pesan',TRUE);
 		$url=$this->input->post('url',TRUE);
@@ -33,7 +34,7 @@ class Form_visitors extends AN_Apricot{
 			$hasil=json_decode($rsp,true);
 			if($hasil['success']==true){
 
-					$this->db->insert("kontak_masuk",array("nama"=>$nama,"email"=>$email,"phone"=>$phone,"pesan"=>$pesan,"tanggal"=>$tanggal,"ip"=>$ip));
+					$this->db->insert("kontak_masuk",array("nama"=>$nama,"email"=>$email,"judul"=>$judul,"phone"=>$phone,"pesan"=>$pesan,"tanggal"=>$tanggal,"ip"=>$ip));
 
 
 					if($this->input->is_ajax_request()){

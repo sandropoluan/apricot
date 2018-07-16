@@ -27,7 +27,7 @@ class AN_Apricot extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 
-		$this->load->helper(array('custom_url','front_end','filter','text'));
+		$this->load->helper(array('tambahan','custom_url','front_end','filter','text'));
 
 		$this->load->library("informasi_web");
 		$this->system_info=$this->informasi_web->get_for_system();
@@ -41,12 +41,22 @@ class AN_Apricot extends CI_Controller{
 		$this->informasi=$this->informasi_web->get();
 
 		//aktifkan title
-		$this->load->library("title");
+		$this->load->library(array("title","artikel","galeri","biodata_web","menu",'kategori','tag','newsticker','pihak_ketiga','pages'));
 
 		//cari tema
-		$tema_aktif=$this->db->get_where("tema",array("aktif"=>"Y"));
-		if($tema_aktif->num_rows()>0){
-			$data_tema=$tema_aktif->row();
+
+		$cache_tema_aktif=$this->cache->file->get('tema_aktif');
+		if($cache_tema_aktif === FALSE){
+			$tema_aktif=$this->db->get_where("tema",array("aktif"=>"Y"));
+			$tema_aktif=array('jumlah'=>$tema_aktif->num_rows(),'data'=>@$tema_aktif->row());
+			$this->cache->file->save('tema_aktif',$tema_aktif,6000000);
+		} else {
+			$tema_aktif=$cache_tema_aktif;
+		}
+		
+
+		if($tema_aktif['jumlah']>0){
+			$data_tema=$tema_aktif['data'];
 			$this->tema=$data_tema->nama_tema;
 			$this->session->set_userdata("tema_aktif",$data_tema->nama_tema."/");
 		} else {
@@ -55,38 +65,24 @@ class AN_Apricot extends CI_Controller{
 		}
 
 
-	 $this->load->library("artikel");
 	 $this->artikel_populer=$this->artikel->artikel_populer($this->system_info['max_populer_artikel']);
-
-	 $this->load->library("galeri");
-	 
-
-	 $this->load->library("biodata_web");
 	 $this->biodata=$this->biodata_web->biodata;
 
-
-	 $this->load->library("menu");
 	 $this->menu_horizontal=$this->menu->one_level_horizontal;
 	 $this->menu_vertikal=$this->menu->one_level_vertikal;
 
-
-	 $this->load->library('kategori');
 	 $this->kategori_artikel=$this->kategori->one_level_artikel();
 	 $this->kategori_galeri=$this->kategori->kategori_galeri();
 
-
-	 $this->load->library('tag');
 	 $this->tags=$this->tag->tags;
 
-
-	 $this->load->library('newsticker');
 	 $this->news_ticker=$this->newsticker->get_news();
 
-
-	 $this->load->library('pihak_ketiga');
 	 $this->recaptcha=$this->pihak_ketiga->get_recaptcha();
 	 $this->google_analytics=$this->pihak_ketiga->google_analytics();
 	 $this->disqus=$this->pihak_ketiga->get_disqus();
+
+
 
 
 	 $this->public_data=array(
@@ -101,22 +97,17 @@ class AN_Apricot extends CI_Controller{
 			"news_ticker"=>$this->news_ticker,
 			"recaptcha"=>$this->recaptcha,
 			"google_analytics"=>$this->google_analytics,
-			"disqus"=>$this->disqus
-	 	);
+			"disqus"=>$this->disqus,
+		 );
+		 
+	
 
 	 $this->public_data["informasi"]["author"]=$this->biodata["nama"];
 	 $this->public_data["informasi"]["article-author"]=$this->biodata["link-fb"];
 	 $this->public_data["informasi"]["article-publisher"]=$this->biodata["link-fb"];
-
-
-	 $this->load->library('pages');
-
+	 $this->output->enable_profiler(TRUE);
 	}
 
-
-	protected function get_artikel(){
-		//$this->artikel->artikel()
-	}
 
 
 

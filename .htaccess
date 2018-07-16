@@ -20,8 +20,8 @@ RewriteRule ^(.*)$ index.php/$1 [L,QSA]
 
 
 
-php_value upload_max_filesize 100M
-php_value post_max_size 100M
-php_value max_execution_time 0
+#php_value upload_max_filesize 100M
+#php_value post_max_size 100M
+#php_value max_execution_time 0
 
 Options -Indexes

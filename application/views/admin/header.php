@@ -32,6 +32,8 @@ $levela=($user_level=='1')?"Super Admin":"Admin";
    <link href="<?php path_adm() ?>/plugins/datatables/extensions/Responsive/css/responsive.dataTables.css" rel="stylesheet" type="text/css" />
      <!-- DATATABLES -->
 
+
+  <link href="<?php path_adm() ?>/datepicker/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" type="text/css" />    
    
     <link href="<?php path_adm() ?>/dist/css/skins/skin-yellow.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php path_adm() ?>/dist/codemirror/lib/codemirror.css" rel="stylesheet" type="text/css" />
@@ -64,7 +66,7 @@ $levela=($user_level=='1')?"Super Admin":"Admin";
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="indexoo.html" class="logo">
+        <a href="<?php echo base_url() ?>" target="_blank" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">A<span style='color:#00c0ef'><b>CMS</b></span></span>
           <!-- logo for regular state and mobile devices -->
@@ -204,6 +206,25 @@ $levela=($user_level=='1')?"Super Admin":"Admin";
             </li>
             <?php } ?>
 
+
+           <li class='treeview <?php if($npage==26 || $npage==27){ echo'active';} ?>'><a href="#"><i class='fa fa-flag-checkered'></i><span>Agenda</span><i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">                
+                <li class='<?php if($npage==27){ echo'active';} ?>'><a href="<?php echo $burl; ?>/semua_agenda"><i class='fa fa-circle-o'></i><span>Semua Agenda</span></a></li>
+                <li class='<?php if($npage==26){ echo'active';} ?>'><a href="<?php echo $burl; ?>/agenda"><i class='fa fa-circle-o'></i><span>Agenda baru</span></a></li>
+                
+              </ul>
+            </li>
+
+
+            <li class='treeview <?php if($npage==28 || $npage==29){ echo'active';} ?>'><a href="#"><i class='fa fa-cloud-download'></i><span>Download</span><i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">                
+                <li class='<?php if($npage==28){ echo'active';} ?>'><a href="<?php echo $burl; ?>/semua_download"><i class='fa fa-circle-o'></i><span>Semua File</span></a></li>
+                <li class='<?php if($npage==29){ echo'active';} ?>'><a href="<?php echo $burl; ?>/download"><i class='fa fa-circle-o'></i><span>File baru</span></a></li>
+                
+              </ul>
+            </li>
+
+
             <li class='treeview <?php if($npage==9){ echo'active';} ?>'><a href="#"><i class='fa  fa-image'></i><span>Media</span><i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">                
                 <li class='<?php if($npage==9){ echo'active';} ?>'><a href="<?php echo $burl; ?>/media"><i class='fa fa-circle-o'></i><span>Semua</span></a></li>
@@ -215,7 +236,22 @@ $levela=($user_level=='1')?"Super Admin":"Admin";
             <li class='<?php if($npage==21){ echo'active';} ?>'><a href="<?php echo base_url('admin/news_ticker'); ?>"><i class='fa fa-list-alt'></i><span>News Ticker</span></a></li>
 
 
+            <li class='treeview <?php if($npage==34 || $npage==35){ echo'active';} ?>'><a href="#"><i class='fa  fa-question'></i><span>FAQ</span><i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">                
+                <li class='<?php if($npage==34){ echo'active';} ?>'><a href="<?php echo $burl; ?>/semua_faq"><i class='fa fa-circle-o'></i><span>Semua</span></a></li>
+                <li class='<?php if($npage==35){ echo'active';} ?>'><a href='<?php echo $burl; ?>/faq'><i class='fa fa-circle-o'></i><span>FAQ baru</span></a></li>
+                
+              </ul>
+            </li>
 
+
+            <li class='treeview <?php if($npage==36 || $npage==37){ echo'active';} ?>'><a href="#"><i class='fa  fa-image'></i><span>Group banner</span><i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">                
+                <li class='<?php if($npage==36){ echo'active';} ?>'><a href="<?php echo $burl; ?>/group_banner"><i class='fa fa-circle-o'></i><span>Semua</span></a></li>
+                <li class='<?php if($npage==37){ echo'active';} ?>'><a href='<?php echo $burl; ?>/banner'><i class='fa fa-circle-o'></i><span>Group baru</span></a></li>
+                
+              </ul>
+            </li>
 
             <li class='header'>Pengaturan</li>
 
@@ -283,6 +319,16 @@ $levela=($user_level=='1')?"Super Admin":"Admin";
 
        <li class='<?php if($npage==23){ echo'active';} ?>'><a href="<?php echo $burl; ?>/kontak_masuk"><i class='fa fa-paper-plane-o'></i> <span>Kotak Masuk</span></a> </li>
 
+              <?php if($user_level=='1'){
+                  ?>
+       <li class='<?php if($npage==32){ echo'active';} ?>'><a href="<?php echo $burl; ?>/smtp_email"><i class='fa fa-paper-plane-o'></i> <span>SMTP Email</span></a> </li>
+                <?php }
+               ?>      
+
+                 <li class="header">Cache</li>
+                 <li>
+                  <div id="clear-cache" class="btn btn-sm btn-warning" style="margin: 5px 5px 0 15px">Clear Cache</div>
+                 </li>
           </ul><!-- /.sidebar-menu -->
           <br><br>
         </section>

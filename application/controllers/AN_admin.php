@@ -788,6 +788,337 @@ class AN_admin extends CI_Controller {
 	}
 
 
+
+	function agenda($id='0'){
+
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"Input Agenda",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>26,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				);	
+
+			$agenda=$this->db->where('id',$id)->get("agenda");
+			if($agenda->num_rows()>0 || $id=='0' ){
+				
+				if($agenda->num_rows()>0){
+					$d=$agenda->row();
+
+					$data['agenda_id']=$id;
+					$data['agenda_judul']=$d->judul;
+					$data['agenda_deskripsi']=$d->deskripsi;
+					$data['agenda_tanggal_mulai']=$d->tanggal_mulai;
+					$data['agenda_tanggal_selesai']=$d->tanggal_selesai;
+					$data['agenda_foto']=$d->foto;
+
+				} else {
+
+					$data['agenda_id']=$id;
+					$data['agenda_judul']="";
+					$data['agenda_deskripsi']="";
+					$data['agenda_tanggal_mulai']="";
+					$data['agenda_tanggal_selesai']="";
+					$data['agenda_foto']="";
+
+
+				}
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/agenda",$data);
+			$this->load->view("admin/footer",$data);	
+
+			} else {
+				show_404();
+			}
+
+		}
+
+	}
+
+	function semua_agenda(){
+
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"Input Agenda",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>27,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				'agendas'=>$this->db->order_by("id","desc")->get("agenda")->result_array()
+				);
+
+
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/semua_agenda",$data);
+			$this->load->view("admin/footer",$data);
+
+		}		
+
+	}
+
+
+
+	function semua_download(){
+
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"Semua Download",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>28,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				'download'=>$this->db->order_by("id","desc")->get("download")->result_array()
+				);
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/semua_download",$data);
+			$this->load->view("admin/footer",$data);
+
+	}
+
+
+	function download($id="0"){
+
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"Download",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>29,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				);
+
+			$download=$this->db->where("id",$id)->get("download");
+			if($download->num_rows()>0 || $id=="0"){
+
+				if($download->num_rows()>0){
+
+				$file=$download->row();
+				$data['file_id']=$file->id;
+				$data['file']=$file->file;
+				$data['file_nama']=$file->nama_file;
+				$data['deskripsi_file']=$file->deskripsi;
+
+				} else {
+
+				$data['file_id']="";
+				$data['file']="";
+				$data['file_nama']="";
+				$data['deskripsi_file']="";	
+
+				}
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/download",$data);
+			$this->load->view("admin/footer",$data);
+
+
+			} else {
+				show_404();
+
+			}
+
+		}
+
+	}
+
+
+
+
+	function reply($id){
+
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+			$pesan=$this->db->get_where("kontak_masuk",array("id"=>$id));
+			if($pesan->num_rows()>0){
+
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"Balas Email",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>33,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				'pesan'=>$pesan->row_array(),
+				);
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/reply",$data);
+			$this->load->view("admin/footer",$data);
+
+
+
+
+			} else {
+				show_404();
+			}
+
+		}
+
+
+	}
+
+	function semua_faq(){
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+			$faq=$this->db->order_by('id','desc')->get("faq");
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"FAQ",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>34,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				'faq'=>$faq->result_array(),
+				);
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/semua_faq",$data);
+			$this->load->view("admin/footer",$data);
+		}		
+	}
+
+
+	function faq($id=0){
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+			$datas=array(
+				'id'=>0,
+				'pertanyaan'=>'',
+				'jawaban'=>'',
+			);
+
+			$faq=$this->db->get_where('faq',array('id'=>$id));
+			if($id > 0 && !($faq->num_rows()>0)){
+				show_404();
+				exit();
+			} 
+
+			if($faq->num_rows()>0){
+				$datas= $faq->row_array();
+			}
+
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"FAQ Baru",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>35,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				'faq'=>$datas,
+				);
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/faq",$data);
+			$this->load->view("admin/footer",$data);
+
+		}		
+			
+	}
+
+
+	function group_banner(){
+
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+			$groups=$this->db->order_by('id_group	','desc')->get("group_banner");
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"Group banner",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>36,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				'groups'=>$groups->result_array(),
+				);
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/group_banner",$data);
+			$this->load->view("admin/footer",$data);			
+		}
+	}
+
+	function banner($id=0){
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+			$banner=array(
+				"id_group"=>0,
+				"nama"=>""
+			);
+
+			$item_banner=array();
+
+			$cari=$this->db->get_where("group_banner",array("id_group"=>$id));
+			if($id > 0 && !($cari->num_rows()>0)){
+				show_404();
+				exit();
+			} else {
+				$banner=$cari->row_array();
+				$item_banner=$this->db->order_by('id','asc')->get_where("banner_item",array("id_group"=>$id))->result_array();
+			}
+
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"Buat group banner",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>37,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				'banner'=>$banner,
+				'item_banner'=>$item_banner,
+				);	
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/banner",$data);
+			$this->load->view("admin/footer",$data);		
+
+
+		}
+	}
+
 	function distribusi_tema(){
 
 		if(!$this->login){
@@ -846,6 +1177,51 @@ class AN_admin extends CI_Controller {
 	}
 
 
+
+
+	function smtp_email(){
+
+		if(!$this->login){
+			redirect("admin/login");
+		} else {
+
+		if($this->level_user!=1){
+			show_404();
+			exit;
+		}
+
+
+		$smtp=$this->db->get_where("smtp_email",array("id"=>"1"));
+		if($smtp->num_rows()<1){
+			$this->db->insert("smtp_email",array("id"=>"1"));
+			$smtp=$this->db->get_where("smtp_email",array("id"=>"1"));
+		}
+
+			$data=array(
+				'avatar'=>$this->avatar_user,
+				'path_avatar'=>base_url()."an-component/media/upload-user-avatar/".$this->avatar_user,
+				'title'=>"SMTP Email",
+				'user'=>$this->name_user,
+				'user_level'=>$this->level_user,
+				'npage'=>32,
+				'burl'=>base_url()."admin",
+				'id_user'=>$this->id_user,
+				'smtp'=>$smtp->row_array(),
+				);
+
+			$this->load->view("admin/header",$data);
+			$this->load->view("admin/smtp_email",$data);
+			$this->load->view("admin/footer",$data);
+
+
+
+
+		}
+
+	}
+
+
+
 	function layout_widget(){
 
 		if(!$this->login){
@@ -871,23 +1247,32 @@ class AN_admin extends CI_Controller {
 
 	 function proseslogin(){
 	 	if($this->input->post()){
-	 		$user=filterquote($this->input->post("username",TRUE),"all");
-	 		$pass=md5($this->input->post("password"));
+	 		$user=($this->input->post("username"));
+	 		$pass=sha1(md5($this->input->post("password")));
 
-	 		$cari=$this->db->get_where("user",array("name_user"=>$user,"password_user"=>$pass,"status_user"=>"Y","terhapus"=>"N"));
+			 //$cari=$this->db->get_where("user",array("name_user"=>$user,"password_user"=>$pass,"status_user"=>"Y","terhapus"=>"N"));
+			 
+			 $cari=$this->db->get_where("user",array("name_user"=>$user,"status_user"=>"Y","terhapus"=>"N"));
 
-	 		if($cari->num_rows()<1){
+	 		if(!($cari->num_rows()>0)){
 	 			redirect("admin/login/1");
-	 		}
-	 		else{
-	 			$row=$cari->row();
-	 			$data_sessi=array('login'=>true,
-	 						'id_user'=>$row->id_user,
-	 						'name_user'=>$row->name_user,
-	 						'password_user'=>$row->password_user,
-	 						'level_user'=>$row->level_user);
-	 			$this->session->set_userdata($data_sessi);
-	 			redirect("admin");
+	 		} else {
+				 $row=$cari->row();
+				 
+				 if(password_verify($pass,$row->password_user)){
+
+					$data_sessi=array('login'=>true,
+					'id_user'=>$row->id_user,
+					'name_user'=>$row->name_user,
+					'password_user'=>$row->password_user,
+					'level_user'=>$row->level_user);
+					$this->session->set_userdata($data_sessi);
+					redirect("admin");
+
+				 } else {
+					redirect("admin/login/1");
+				 }
+	 			
 	 		}
 
 	 	}

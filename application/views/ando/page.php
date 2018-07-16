@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 		 <div class='konten'>
 			<div class="isi">
-				<?php echo $page['isi']; ?>
+				<?php echo reversequote($page['isi'],'all'); ?>
 			</div>
 
 		 </div>

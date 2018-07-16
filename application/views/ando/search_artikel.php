@@ -33,7 +33,7 @@ foreach (ambil_tag($artikel['tags']) as  $tag) {
 echo "</div>";
 
 echo "<div class='isi'>";
-echo strip_tags(word_limiter($artikel['isi'],100));
+echo strip_tags(word_limiter(reversequote($artikel['isi'],'all'),100));
 echo "</div>";
 
 echo "<div class='social'>";

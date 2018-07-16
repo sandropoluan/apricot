@@ -102,8 +102,8 @@ class Artikel extends CI_Model
 
 			return array(
 				"artikel_id"=>$data->artikel_id,
-				"artikel_judul"=>reversequote($data->artikel_judul,"all"),
-				"artikel_isi"=>reversequote($data->artikel_isi,"all"),
+				"artikel_judul"=>($data->artikel_judul),
+				"artikel_isi"=>($data->artikel_isi),
 				"artikel_kategori"=>$data->artikel_kategori,
 				"artikel_tags"=>$active_tag,
 				"artikel_foto"=>$data->artikel_foto,

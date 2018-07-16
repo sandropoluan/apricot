@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<div class="artikel">
 				<div class="konten">
-					<?php echo $informasi["privacy"]; ?>
+					<?php echo reversequote($informasi["privacy"],'all'); ?>
 					
 				</div>
 			</div>
