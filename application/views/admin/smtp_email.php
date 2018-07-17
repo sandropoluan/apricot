@@ -12,7 +12,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
             <small>Outgoing Server</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="<?php echo $burl; ?>/"><i class="fa fa-dashboard"></i> Halaman Utama</a></li><li class="active">Biodata</li>
+            <li><a href="<?php echo $burl; ?>/"><i class="fa fa-dashboard"></i> Halaman Utama</a></li><li class="active">Pengaturan SMTP</li>
            
           </ol>
         </section>
