@@ -442,7 +442,7 @@ class AN_ajax_admin extends CI_Controller
 
                 	if($id==0){
                 	//$query=$this->db->query("INSERT INTO foto_artikel_temp (nama_foto,token_foto,sesi_form,id_user) VALUES ('$nama','$token_foto','$sesi','$id')");
-					$query=$this->db->insert('foto_artikel',array('nama_foto'=>$nama,'token_foto'=>$token_foto,'sesi_form'=>$sesi,'id_user'=>$id));
+					$query=$this->db->insert('foto_artikel_temp',array('nama_foto'=>$nama,'token_foto'=>$token_foto,'sesi_form'=>$sesi,'id_user'=>$id));
 					
                 	} else {
 
